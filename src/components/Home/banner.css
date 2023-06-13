@@ -1,0 +1,12 @@
+.img3{
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 50%;
+}
+
+.content{
+    background-image: url("../assets/travelCo.jpg");
+    background-repeat: no-repeat;
+    width: 20%;
+    height:400px
+}
