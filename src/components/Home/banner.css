@@ -1,12 +1,19 @@
-.img3{
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 50%;
+.content {
+  height: 100vh;
 }
 
-.content{
-    background-image: url("../assets/travelCo.jpg");
-    background-repeat: no-repeat;
-    width: 20%;
-    height:400px
+.text-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 5px 15px;
+  transform: translate(-50%, -50%);
+  background: gray;
+  color: white;
+  border-radius: 20px;
+  font-size: 50px;
+}
+
+#one {
+  background-image: url("../assets/travel1.jpg");
 }

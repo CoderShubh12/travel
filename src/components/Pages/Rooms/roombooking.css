@@ -1,0 +1,62 @@
+.rooms-header {
+  display: flex;
+  width: 100%;
+  position: sticky;
+
+  top: -29.01rem;
+  margin-top: 85px;
+  z-index: 9;
+  background-color: rgb(167, 192, 224);
+}
+
+.roomheader_internalDiv {
+  position: relative;
+  max-width: 120rem;
+  width: 100%;
+  margin: 0px auto;
+  padding: 1.2rem 0px;
+  background-color: #fff;
+  z-index: 10;
+}
+.room-booking {
+  display: flex;
+}
+.room-destination {
+  width: 33.7rem;
+  padding-right: 1.2rem;
+  position: relative;
+}
+.room-checkin {
+  padding-right: 1.2rem;
+  width: 16.5r;
+}
+.bg-room {
+  background-image: url("../../assets/bgroom.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 60vh;
+  clip-path: polygon(0% 0%, 75% 0%, 100% 50%, 75% 100%, 0% 100%);
+  margin-top: 90px;
+  opacity: 0.5;
+}
+
+.booking_form {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  flex-flow: row;
+  gap: 20px;
+}
+
+.bookinginput {
+}
+.bookinginput_content {
+  background: #fff;
+  padding: 20px;
+}
+.booking_form_bg {
+  background: #000;
+  width: 80vh;
+  height: 60vh;
+  margin-top: 10%;
+}

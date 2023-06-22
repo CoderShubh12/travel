@@ -1,36 +1,123 @@
-import { Box} from '@mui/material';
-import * as React from 'react';
+import React, { useEffect, useState } from "react";
+import "./room.css";
+import SingleRoom from "./SingleRoom";
+import axios from "axios";
 
-import Tab from '@mui/material/Tab';
+const Room = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [checkInDate, setCheckInDate] = useState("");
+  const [checkOutDate, setCheckOutDate] = useState("");
+  const [hotelName, setHotelName] = useState([]);
 
-import TabPanel from '@mui/lab/TabPanel';
+  const [cards, setCards] = useState([]);
 
-import TabList from '@mui/lab/TabList';
-import TabContext from '@mui/lab/TabContext';
-import SingleRoom from './SingleRoom';
+  const handleSubmit = (event) => {
+    event.preventDefault();
 
+    // Perform form submission logic here
+    console.log("Form submitted:", {
+      name,
+      email,
+      checkInDate,
+      checkOutDate,
+      hotelName,
+    });
 
-export default function  Room() {
-  const [value, setValue] = React.useState('1');
+    axios.post("http://localhost:8000/bookedrooms", {
+      name,
+      email,
+      checkInDate,
+      checkOutDate,
+      hotelName,
+    });
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
+    // Reset form fields
+    setName("");
+    setEmail("");
+    setCheckInDate("");
+    setCheckOutDate("");
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const res = await axios.get("http://localhost:8000/hotelData");
+      console.log(res.data);
+      setCards(res.data);
+    };
+    fetchData();
+  }, []);
+
+  const handleSelectHotel = (e) => {
+    const selectedHotelDetail = cards.find(
+      (hotel) => hotel.id === Number(e.target.value)
+    );
+    console.log(selectedHotelDetail);
+
+    // const res = axios.get(
+    //   `http://localhost:8000/hotelData/hotel_name=${e.target.value}`
+    // );
+    // console.log(res, "selected hotel");
+    // setHotelName(res);
   };
 
   return (
-    <Box sx={{ width: '100%', typography: 'body1' ,marginTop:"90px", background:"#ccc"}}>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="Single Room" value="1" />
-            <Tab label="Double Room" value="2" />
-           
-          </TabList>
-        </Box>
-        <TabPanel value="1"><SingleRoom/></TabPanel>
-        <TabPanel value="2">Double Room</TabPanel>
-  
-      </TabContext>
-    </Box>
+    <>
+      <div className="room-booking-bg">
+        <form onSubmit={handleSubmit} className="form-container">
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(event) => setName(event.target.value)}
+            required
+          />
+          <label htmlFor="name">Select Hotel:</label>
+          <select
+            placeholder="select hotels"
+            onChange={handleSelectHotel}
+            value={hotelName}
+            name="hotelName"
+          >
+            {cards.map((item) => (
+              <option value={item.id}>{item.hotel_name}</option>
+            ))}
+          </select>
+
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+
+          <label htmlFor="check-in">Check-in Date:</label>
+          <input
+            type="date"
+            id="check-in"
+            value={checkInDate}
+            onChange={(event) => setCheckInDate(event.target.value)}
+            required
+          />
+
+          <label htmlFor="check-out">Check-out Date:</label>
+          <input
+            type="date"
+            id="check-out"
+            value={checkOutDate}
+            onChange={(event) => setCheckOutDate(event.target.value)}
+            required
+          />
+
+          <button type="submit">Book Room</button>
+        </form>
+      </div>
+      <SingleRoom cards={cards} />
+    </>
   );
-}
+};
+
+export default Room;

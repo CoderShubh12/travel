@@ -1,14 +1,19 @@
-import React from 'react'
-import Carousel from '../../../common/Carousel'
-import { hotelCards } from '../../../constant/data'
+import Carousel from "../../../common/Carousel";
 
-const SingleRoom = () => {
+const SingleRoom = ({ cards }) => {
+  console.log("cards", cards);
   return (
-    <div style={{background:"black",}}>
-        <Carousel cards={hotelCards}/>
-          
+    <div
+      style={{
+        background: " bisque",
+        margin: "auto",
+        padding: "10px",
+        color: "black",
+      }}
+    >
+      <Carousel cards={cards} />
     </div>
-  )
-}
+  );
+};
 
-export default SingleRoom
+export default SingleRoom;
